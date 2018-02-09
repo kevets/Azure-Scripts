@@ -13,7 +13,7 @@ write-host ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 write-host 
 write-host '    Connect PowerShell session to Office 365 and Exchange on-line' -ForegroundColor green
 write-host '    ---------------------------------------------------------------' -ForegroundColor green
-write-host '1)  Login using your Office365 Administrator credentials' -ForegroundColor Yellow
+write-host '1)  Login to EO, S4B Administrator credentials' -ForegroundColor Yellow
 write-host 'SC)  Login to Office365 Security and Compliance powershell' -ForegroundColor Yellow
 write-host "XG)  Export group reports to current folder" -ForegroundColor green
 write-host "XU)  Export user details to current folder" -ForegroundColor green
@@ -60,6 +60,8 @@ $cred = Get-Credential -Credential $user
 #——– Import office 365 Cmdlets  ———–
 
 Import-Module MSOnline
+Import-Module SkypeOnlineConnector
+
 
 #———— Establish an Remote PowerShell Session to office 365 ———————
 
@@ -68,12 +70,15 @@ Connect-MsolService -Credential $cred
 #———— Establish an Remote PowerShell Session to Exchange Online ———————
 
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $cred -Authentication Basic -AllowRedirection
+Import-PSSession $session
 
+$session = New-CsOnlineSession -Credential $credential -Verbose
+Import-PSSession $session
 
 #———— This command that we use for implicit remoting feature of PowerShell 2.0 ———————
 
 
-Import-PSSession $session
+
 
 #———— Indication ———————
 write-host 

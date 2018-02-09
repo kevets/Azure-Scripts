@@ -1,1 +1,2 @@
-powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -Command .\office365tools.ps1
+%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -Command .\office365tools.ps1
+rem %SystemRoot%\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -Command .\office365tools.ps1
